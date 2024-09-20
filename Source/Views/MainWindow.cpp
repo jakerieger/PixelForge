@@ -10,8 +10,8 @@
 
 #include <QVBoxLayout>
 #include <QLabel>
-#include <QPushButton>
 #include <QDockWidget>
+#include <QMenuBar>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -48,10 +48,27 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->addLayout(layoutWrapper);
 
     setCentralWidget(ui->centralWidget);
-
     ui->centralWidget->setLayout(layout);
+
+    CreateMenuBar();
 }
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+void MainWindow::CreateMenuBar() {
+    const auto menuBar = this->menuBar();
+
+    // File menu
+    {
+        const auto fileMenu = menuBar->addMenu("File");
+        auto newAction = fileMenu->addAction("New", QKeySequence::New);
+        auto openAction = fileMenu->addAction("Open", QKeySequence::Open);
+        auto saveAction = fileMenu->addAction("Save", QKeySequence::Save);
+        auto saveAsAction = fileMenu->addAction("Save As..", QKeySequence::SaveAs);
+        fileMenu->addSeparator();
+        const auto exitAction = fileMenu->addAction("Exit", QKeySequence::Quit);
+        std::ignore = connect(exitAction, &QAction::triggered, this, &QMainWindow::close);
+    }
 }

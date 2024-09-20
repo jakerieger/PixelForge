@@ -21,6 +21,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    void CreateMenuBar();
 };
 
 
