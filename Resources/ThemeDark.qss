@@ -1,0 +1,8 @@
+QMainWindow {
+    background-color: #191b1c;
+    color: #dcd9d4;
+}
+
+QDockWidget {
+    background-color: #111313;
+}
